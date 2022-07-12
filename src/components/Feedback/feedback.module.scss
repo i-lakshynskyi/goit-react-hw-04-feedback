@@ -1,0 +1,19 @@
+
+.feedbackWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+  text-align: center;
+
+  .buttons {
+    flex-direction: row;
+
+    button {
+      margin: 10px;
+    }
+  }
+}
+
