@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import s from '../Feedback/feedback.module.scss';
+import s from '../feedback.module.scss';
 
 class FeedbackOptions extends Component {
   static propTypes = {
