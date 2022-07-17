@@ -32,10 +32,10 @@ function Feedback() {
         <FeedbackOptions onLeaveFeedback={onLeaveFeedback} options={['Good', 'Neutral', 'Bad']}/>
       </Section>
 
-      <Section>
+      <Section title={'Statistics'}>
         {
           total > 0
-            ? <Statistics good={good} neutral={neutral} bad={bad} total={total}/>
+            ? <Statistics  good={good} neutral={neutral} bad={bad} total={total}/>
             : <Notification message="There is no feedback"/>
         }
       </Section>
