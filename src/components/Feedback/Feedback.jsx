@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useReducer} from 'react';
 import Statistics from './Statistics/Statistics';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Section from './Section/Section';
@@ -6,24 +6,35 @@ import Notification from './Notification/Notification';
 
 import s from './feedback.module.scss';
 
+
+const reviewsCounterReducer = (state, {type, payload}) => {
+  switch (type) {
+    case 'good':
+      return  {...state, good: state.good + payload, total: state.total + payload};
+    case 'neutral':
+      return  {...state, neutral: state.neutral + payload, total: state.total + payload};
+    case 'bad':
+      return  {...state, bad: state.bad + payload, total: state.total + payload};
+    default:
+      return state;
+  }
+}
+
+const init = (initState) => {
+  return initState;
+}
+
 function Feedback() {
-  const[good, setGood] = React.useState(0);
-  const[neutral, setNeutral] = React.useState(0);
-  const[bad, setBad] = React.useState(0);
-  const[total, setTotal] = React.useState(0);
+  const [state, dispatch] = useReducer(reviewsCounterReducer, {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+    total: 0,
+  }, init);
 
   const onLeaveFeedback = event => {
     const name = event.currentTarget.name;
-    if (name === 'good'){
-      setGood(prevState => prevState + 1);
-    }
-    if (name === 'neutral'){
-      setNeutral(prevState => prevState + 1);
-    }
-    if (name === 'bad'){
-      setBad(prevState => prevState + 1);
-    }
-    setTotal(prevState => prevState + 1);
+    dispatch({type: name, payload : 1});
   };
 
   return (
@@ -34,8 +45,8 @@ function Feedback() {
 
       <Section title={'Statistics'}>
         {
-          total > 0
-            ? <Statistics  good={good} neutral={neutral} bad={bad} total={total}/>
+          state.total > 0
+            ? <Statistics  good={state.good} neutral={state.neutral} bad={state.bad} total={state.total}/>
             : <Notification message="There is no feedback"/>
         }
       </Section>
