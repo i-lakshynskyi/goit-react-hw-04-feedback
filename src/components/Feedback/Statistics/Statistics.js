@@ -1,23 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Statistics({ good, neutral, bad, total }) {
+function Statistics({ good, neutral, bad }) {
+  const total = good + neutral + bad;
+  const positivePercentage = (good / total * 100).toFixed(0);
   return (
     <div>
       <div>Good: {good}</div>
       <div>Neutral: {neutral}</div>
       <div>Bad: {bad}</div>
       <div>Total: {total}</div>
-      <div>Positive feedback: {(good / total * 100).toFixed(0)}%</div>
+      <div>Positive feedback: {positivePercentage}%</div>
     </div>
   );
 }
 
 Statistics.propTypes = {
-  good: PropTypes.number,
-  neutral: PropTypes.number,
-  bad: PropTypes.number,
-  total: PropTypes.number,
-  positivePercentage: PropTypes.number,
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
 };
 export default Statistics;
